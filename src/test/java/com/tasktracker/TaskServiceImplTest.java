@@ -1,13 +1,14 @@
 // src/test/java/com/tasktracker/service/impl/TaskServiceImplTest.java
 package com.tasktracker;
 
-
 import com.tasktracker.model.Task;
 import com.tasktracker.repository.TaskRepository;
 import com.tasktracker.service.impl.TaskServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
+
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +27,7 @@ public class TaskServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        sampleTask = new Task(1L, "Test Task", "Test Description", false);
+        sampleTask = new Task(1L, "Test Task", "Test Description", false, LocalDate.now());
     }
 
     @Test
@@ -54,7 +55,7 @@ public class TaskServiceImplTest {
 
     @Test
     void testUpdateTask() {
-        Task updatedDetails = new Task(null, "Updated Title", "Updated Desc", true);
+        Task updatedDetails = new Task(null, "Updated Title", "Updated Desc", true, LocalDate.now());
         when(taskRepository.findById(1L)).thenReturn(Optional.of(sampleTask));
         when(taskRepository.save(any(Task.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
