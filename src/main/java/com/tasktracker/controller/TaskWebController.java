@@ -18,6 +18,11 @@ public class TaskWebController {
     public TaskWebController(TaskService service) {
         this.service = service;
     }
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/tasks";
+    }
+
 
     @GetMapping("/tasks")
     public String viewTasks(@RequestParam(value = "status", required = false) String status, Model model) {
